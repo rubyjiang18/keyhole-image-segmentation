@@ -11,21 +11,14 @@ The files in `segmentation` directory contains the image list.
 ## Directory Structure
 keyhole_segmentation
 
-├── images<br/>
-│   └── *.jpg  # keyhole images for segmentation<br/>  
-│── masks<br/>
-│   └── *.png  # segmentation masks corresponds to the images<br/>
-└── segmentation<br/>
-    │── train.txt  # image list for training<br/>
-    │── trainval.txt  # all images<br/>
-    |── val.txt  # image list for validation<br/>
-    └── test.txt  # image list for test<br/>
-
-.
-├── build                   # Compiled files (alternatively `dist`)
-├── docs                    # Documentation files (alternatively `doc`)
-├── src                     # Source files (alternatively `lib` or `app`)
-├── test                    # Automated tests (alternatively `spec` or `tests`)
-├── tools                   # Tools and utilities
-├── LICENSE
-└── README.md
+    .
+    ├── image
+    │   ├── *.jpg               # keyhole images for segmentation
+    ├── masks
+    │   ├── *.png               # segmentation masks corresponds to the images
+    ├── segmentation           
+    │   ├── train.txt           # image list for training
+    │   ├── trainval.txt        # all images in training and validation
+    │   ├── val.txt             # image list for validation
+    │   └── test.txt            # image list for test
+    └── ...
