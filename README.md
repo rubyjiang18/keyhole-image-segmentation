@@ -11,11 +11,12 @@ The files in `segmentation` directory contains the image list.
 ## Directory Structure
 keyhole_segmentation
 
-├── images
-│   └── *.jpg  # images for segmentation
-│── masks
-│   └── *.png  # segmentation masks corresponds to the images
-└── segmentation
-    │── train.txt  # image list for training
-    │── trainval.txt  # all images
-    └── val.txt  # image list for validation
+├── images  
+│   └── *.jpg  # keyhole images for segmentation  
+│── masks  
+│   └── *.png  # segmentation masks corresponds to the images  
+└── segmentation  
+    │── train.txt  # image list for training  
+    │── trainval.txt  # all images  
+    |── val.txt  # image list for validation  
+    └── test.txt  # image list for test  
