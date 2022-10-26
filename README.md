@@ -10,12 +10,12 @@ The dataset contains xxx for training, xxx images for validation and xxx for tes
 The files in `segmentation` directory contains the image list.
 ## Directory Structure
 keyhole_segmentation
+
 ├── images
-│   └── *.jpg  # keyhole images for segmentation
+│   └── *.jpg  # images for segmentation
 │── masks
 │   └── *.png  # segmentation masks corresponds to the images
 └── segmentation
     │── train.txt  # image list for training
     │── trainval.txt  # all images
-    |── val.txt  # image list for validation
-    └── test.txt  # image list for test
+    └── val.txt  # image list for validation
