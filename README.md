@@ -1,14 +1,23 @@
 # keyhole-image-segmentation
 This is the repo for keyhole image segmentation
 
+## Keyhole Segmentation Models
+1. Unet
+2. Unet + ResNet 
+3. Unet + MobileNet
+4. Unet + ConvNeXt
+5. Deeplab v3
+6. Deeplab + ResNet 
+7. DeepLab + MobileNet
+8. DeepLab + ConvNeXt
 
 ## Keyhole Segmentation Dataset
-## Data sources
+### Data sources
 The original data come from 32ID APS at Argonne National Laboratory
-## Specification
+### Specification
 The dataset contains xxx for training, xxx images for validation and xxx for test
 The files in `segmentation` directory contains the image list.
-## Directory Structure
+### Directory Structure
 keyhole_segmentation
 
     .
