@@ -17,7 +17,7 @@ The original data come from 32ID APS at Argonne National Laboratory。
 
 Material | Type | Power (W) | Scan speed (mm/s) | 
 --- | --- | --- | ---
-Al6061 | Moving Laser | x | x
+Al6061 | Moving laser | x | x
 IN718 | x | x | x
 SS304 | x | x | x
 SS316 | x | x | x
