@@ -15,7 +15,7 @@ This is the repo for keyhole image segmentation
 ### Data sources
 The original data come from 32ID APS at Argonne National Laboratory。
 
-| Material      | Type | Power (W)     | Scan speed (mm/s) | Number of images
+| Material      | Type | Power (W)     | Scan speed (mm/s) | Number of images |
 | ------------- |:-------------:|:-----:| -----:|
 | Al6061      | Moving Laser |right-aligned | $1600 |
 | col 2 is      | centered      |   $12 |
