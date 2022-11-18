@@ -2,10 +2,11 @@
 Copied from 
 https://github.com/kevinlu1211/pytorch-unet-resnet-50-encoder/blob/master/u_net_resnet_50_encoder.py
 """
-
 import torch
 import torch.nn as nn
 import torchvision
+
+from torchsummary import summary
 resnet = torchvision.models.resnet.resnet50(pretrained=True)
 
 
@@ -136,6 +137,9 @@ class UNetWithResnet50Encoder(nn.Module):
         else:
             return x
 
-# model = UNetWithResnet50Encoder().cuda()
-# inp = torch.rand((2, 3, 512, 512)).cuda()
-# out = model(inp)
+if __name__ == "__main__":
+    model = UNetWithResnet50Encoder()
+    inp = torch.rand((1, 3, 512, 512))
+    # out = model(inp)
+    # print(out.shape)
+    summary(model, inp)
