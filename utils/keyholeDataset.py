@@ -9,14 +9,14 @@ from torchvision import transforms
 
 class Keyhole(Dataset):
     @staticmethod
-    def pad_to_572(image, mode):
+    def pad_to_576(image, mode):
         assert mode in {'image', 'mask'}
         # pad val
         pad_val = 0 # if mask, pad_val = 0 black
         if mode == "image":
           pad_val = np.mean(image, axis=(0, 1))
         # pad dimension
-        dimension = 572 # goal (572, 572)
+        dimension = 576 #572 # goal (572, 572)
         height = image.shape[0]
         width = image.shape[1]
         d_height = dimension - height
@@ -57,7 +57,7 @@ class Keyhole(Dataset):
             # Use you favourite library to load the image
             image = imread(img_path) 
             # pad image to 572*572
-            fullset_X.append(self.pad_to_572(image, "image"))
+            fullset_X.append(self.pad_to_576(image, "image"))
         for idx, name in enumerate(self.Y_files):
             # print("mask name ",name)
             if 'tif' not in name:
@@ -65,7 +65,7 @@ class Keyhole(Dataset):
             mask_path = os.path.join(self.Y_dir, name)
             mask = imread(mask_path)
             mask = cv.normalize(mask, None, 0, 1, cv.NORM_MINMAX) # normalize to [0,1]
-            fullset_Y.append(self.pad_to_572(mask, "mask"))
+            fullset_Y.append(self.pad_to_576(mask, "mask"))
 
         # train_val_test index
         train_idx = []

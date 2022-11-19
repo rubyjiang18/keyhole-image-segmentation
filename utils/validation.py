@@ -9,11 +9,6 @@ def validation(model, device, val_loader, optimizer, criterion, scheduler, epoch
       images = batch['image']
       true_masks = batch['mask']
 
-      assert images.shape[1] == model.n_channels, \
-                  f'Network has been defined with {model.n_channels} input channels, ' \
-                  f'but loaded images have {images.shape[1]} channels. Please check that ' \
-                  'the images are loaded correctly.'
-
       images = images.float().to(device)
       true_masks = true_masks.float().to(device)
 

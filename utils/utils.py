@@ -1,3 +1,4 @@
+import pandas as pd
 import matplotlib.pyplot as plt
 import segmentation_models_pytorch as smp
 import torch
@@ -44,4 +45,15 @@ def save_model(model, epoch, model_name, optimizer, scheduler, grad_scaler, batc
             }, model_name + '_epoch_' + str(epoch+1))
 
       
+def save_loss_record(train_loss_record, val_loss_record, csv_file_name):
+    df = pd.DataFrame(columns=['train_loss', 'val_loss'])
+    df['train_loss'] = train_loss_record
+    df['val_loss'] = val_loss_record
+    df.to_csv(csv_file_name, index=False)
 
+def save_loss_record(train_loss_record, val_loss_record, lr_record, csv_file_name):
+    df = pd.DataFrame(columns=['train_loss', 'val_loss', 'lr'])
+    df['train_loss'] = train_loss_record
+    df['val_loss'] = val_loss_record
+    df['lr'] = lr_record[:-1]
+    df.to_csv(csv_file_name, index=False)
