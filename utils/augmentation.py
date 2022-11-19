@@ -31,7 +31,29 @@ def get_training_augmentation():
             ],
             p=0.3,
         ),
+
+        albu.augmentations.transforms.Normalize (
+            mean=(0.485, 0.456, 0.406),
+            std=(0.229, 0.224, 0.225), 
+            max_pixel_value=255.0, 
+            always_apply=False, 
+            p=1.0)
         
+    ]
+
+    return albu.Compose(train_transform)
+
+
+
+
+def get_testing_augmentation():
+    train_transform = [
+        albu.augmentations.transforms.Normalize (
+            mean=(0.485, 0.456, 0.406),
+            std=(0.229, 0.224, 0.225), 
+            max_pixel_value=255.0, 
+            always_apply=False, 
+            p=1.0)
     ]
 
     return albu.Compose(train_transform)
