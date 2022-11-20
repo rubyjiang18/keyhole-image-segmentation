@@ -33,13 +33,14 @@ class Keyhole(Dataset):
         image = cv.copyMakeBorder(image, top, bottom, left, right, cv.BORDER_CONSTANT, None, value = pad_val)
         return image
 
-    def __init__(self, data_path, transform=None, mode="train", csv_name = "/image_and_split.csv"):
+    def __init__(self, data_path, transform=None, preprocess=None, mode="train", csv_name = "/image_and_split.csv"):
 
         assert mode in {"train", "val", "test"}
 
         self.data_path = data_path
         self.mode = mode
         self.transform = transform
+        self.preprocess = preprocess
 
         # X represents images, Y represents masks
         self.X_dir = os.path.join(self.data_path, "images")
@@ -115,5 +116,8 @@ class Keyhole(Dataset):
         #print("x", x.shape)
         y = torch.tensor(y,dtype=torch.float64).unsqueeze_(0)
         y = y.repeat(1, 1, 1)
+
+        if self.preprocess:
+          x =  self.preprocess(x)
         
         return { 'image': x, 'mask': y}
