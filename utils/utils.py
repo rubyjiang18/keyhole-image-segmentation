@@ -42,7 +42,7 @@ def save_model(model, epoch, model_name, optimizer, scheduler, grad_scaler, batc
                         'grad_scaler': grad_scaler.state_dict(),
                         'batch_size': batch_size,
                         'lr': optimizer.param_groups[0]['lr'],
-            }, model_name + '_epoch_' + str(epoch+1))
+            }, model_name + '_epoch_' + str(epoch))
 
       
 def save_loss_record(train_loss_record, val_loss_record, csv_file_name):
