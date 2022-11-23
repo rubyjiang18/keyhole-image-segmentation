@@ -34,7 +34,13 @@ def plot_3_sidebyside(img, img2, img3):
     plt.show()
 
 
-def save_model(model, epoch, model_name, optimizer, scheduler, grad_scaler, batch_size):
+
+'''
+Save model to path, default my google drive
+set path = None to save to colab
+'''
+def save_model(model, epoch, model_name, optimizer, scheduler, grad_scaler, batch_size,
+              path = "/content/drive/MyDrive/DL_segmentation_models/"):
     torch.save({  
                         'model_state_dict': model.state_dict(),
                         'optimizer_state_dict': optimizer.state_dict(),
@@ -42,18 +48,21 @@ def save_model(model, epoch, model_name, optimizer, scheduler, grad_scaler, batc
                         'grad_scaler': grad_scaler.state_dict(),
                         'batch_size': batch_size,
                         'lr': optimizer.param_groups[0]['lr'],
-            }, model_name + '_epoch_' + str(epoch))
+            }, 
+            path + model_name + '_epoch_' + str(epoch))
+
 
       
-def save_loss_record(train_loss_record, val_loss_record, csv_file_name):
-    df = pd.DataFrame(columns=['train_loss', 'val_loss'])
-    df['train_loss'] = train_loss_record
-    df['val_loss'] = val_loss_record
-    df.to_csv(csv_file_name, index=False)
+# def save_loss_record(train_loss_record, val_loss_record, csv_file_name):
+#     df = pd.DataFrame(columns=['train_loss', 'val_loss'])
+#     df['train_loss'] = train_loss_record
+#     df['val_loss'] = val_loss_record
+#     df.to_csv(csv_file_name, index=False)
 
-def save_loss_record(train_loss_record, val_loss_record, lr_record, csv_file_name):
+def save_loss_record(train_loss_record, val_loss_record, lr_record, csv_file_name, 
+                path = "/content/drive/MyDrive/DL_segmentation_models/"):
     df = pd.DataFrame(columns=['train_loss', 'val_loss', 'lr'])
     df['train_loss'] = train_loss_record
     df['val_loss'] = val_loss_record
     df['lr'] = lr_record[:-1]
-    df.to_csv(csv_file_name, index=False)
+    df.to_csv("/content/drive/MyDrive/DL_segmentation_models/" + csv_file_name, index=False)
