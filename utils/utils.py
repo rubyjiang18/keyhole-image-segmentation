@@ -1,8 +1,10 @@
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 import segmentation_models_pytorch as smp
 import torch
 from tqdm import tqdm
+from skimage.color import gray2rgb
 
 
 def plot_2_sidebyside(img, mask):
@@ -66,3 +68,28 @@ def save_loss_record(train_loss_record, val_loss_record, lr_record, csv_file_nam
     df['val_loss'] = val_loss_record
     df['lr'] = lr_record[:-1]
     df.to_csv("/content/drive/MyDrive/DL_segmentation_models/" + csv_file_name, index=False)
+
+
+# For evaluation
+def visualize_prediction_accuracy(pred_mask, true_mask):
+    '''
+    both pred and true mask are grayscale, only one channel
+    '''
+    true_mask = gray2rgb(true_mask) #(576, 576, 3)
+    out = np.zeros(true_mask.shape, dtype='uint8') #(576, 576, 3)
+    t = np.all(true_mask == 1, axis=-1) #(576, 576)
+    p = pred_mask # (576, 576)
+
+    channels = [t & p, t & ~p, ~t & p] # true positive (white), false negative (pink), false positive (blue)
+    colors = [[255, 255, 255], [255, 0, 255], [0, 255, 255]]
+
+    for n in range(3):
+        ch = channels[n]
+        color = colors[n]
+
+        for i in range(ch.shape[0]):
+            for j in range(ch.shape[1]):
+                if ch[i, j] == 1:
+                    out[i,j,:] = color
+    
+    return out

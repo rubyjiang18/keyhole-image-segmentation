@@ -7,6 +7,7 @@ from tifffile import imread
 from torch.utils.data import Dataset
 from torchvision import transforms
 
+# This one is for model trainig, you have both images and masks
 class Keyhole(Dataset):
     @staticmethod
     def pad_to_576(image, mode):
@@ -34,6 +35,11 @@ class Keyhole(Dataset):
         return image
 
     def __init__(self, data_path, transform=None, preprocess=None, mode="train", csv_name = "/image_and_split.csv"):
+        '''
+        transform -> data augmentation
+        preprocess -> normalize 3 channel same as imagenet
+        csv_name -> the csv file that contains the data split for train, val, and test
+        '''
 
         assert mode in {"train", "val", "test"}
 
@@ -121,3 +127,76 @@ class Keyhole(Dataset):
           x =  self.preprocess(x)
         
         return { 'image': x, 'mask': y}
+
+
+
+# This one is for inference, you only have images, no masks
+# I use this for data to predict absorptivity
+class KeyholeNoMask(Dataset):
+    @staticmethod
+    def pad_to_576(image):
+        # pad val
+        pad_val = np.mean(image, axis=(0, 1))
+        # pad dimension
+        dimension = 576 #572 # goal (572, 572)
+        height = image.shape[0]
+        width = image.shape[1]
+        d_height = dimension - height
+        d_width = dimension - width
+        
+        top, bottom, left, right = 0, 0, 0, 0
+        if d_height > 0:
+            top = d_height // 2
+            bottom = d_height - top
+        if d_width > 0:
+            left = d_width // 2
+            right = d_width - left
+
+        image = cv.copyMakeBorder(image, top, bottom, left, right, cv.BORDER_CONSTANT, None, value = pad_val)
+        return image
+
+    def __init__(self, data_path, transform=None, preprocess=None):
+        '''
+        transform -> data augmentation
+        preprocess -> normalize 3 channel same as imagenet
+        '''
+
+        self.data_path = data_path
+        self.transform = transform
+        self.preprocess = preprocess
+
+        # X represents images
+        self.X_dir = os.path.join(self.data_path, "images")
+        self.X_files = sorted(os.listdir(self.X_dir))
+        # full dataset_X and dataset_Y
+        fullset_X = []
+        for idx, name in enumerate(self.X_files):
+            if 'tif' not in name:
+                continue
+            # print("image name ",name)
+            img_path = os.path.join(self.X_dir, name)
+            # Use you favourite library to load the image
+            image = imread(img_path) 
+            # pad image to 572*572
+            fullset_X.append(self.pad_to_576(image))
+        self.X = fullset_X
+
+    def __len__(self):
+        return len(self.X)
+    
+    def __getitem__(self, idx):
+
+        x = self.X[idx]
+        
+        #apply augmentation
+        if self.transform:
+            x = self.transdorm(x)
+
+        #to_tensor
+        x = torch.tensor(x,dtype=torch.float64).unsqueeze_(0)
+        x = x.repeat(3, 1, 1) #torch.Size([3, 572, 572])
+
+        if self.preprocess:
+          x =  self.preprocess(x)
+        
+        return x
