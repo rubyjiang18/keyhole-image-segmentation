@@ -16,16 +16,15 @@ This is the repo for keyhole image segmentation
 
 ## Keyhole Segmentation Dataset
 ### Data sources
-The original data come from 32ID APS at Argonne National Laboratory。
+The original data come from 32ID APS at Argonne National Laboratory. Images are obtained from various laser power (W) and scan speed (mm/s) with no powder layer.
 
-Material | Type | Power (W) | Scan speed (mm/s) | Number of images
---- | --- | --- | --- | ---
-Al6061 | Moving laser | x | x | x
-IN718 | x | x | x | x
-SS304 | x | x | x | x
-SS316 | x | x | x | x
-Ti64 | x | x | x |x 
-Ti64(Spot welding) | x | x | x |x 
+Material | Type  | Number of images | Power (W) - Scan speed (m/s)
+--- | --- | --- | ---
+Al6061 | Moving laser | 119 | 610 - 1.2, 630 - 1.2, 740 - 1.4, 850 - 0.9
+IN718  | Moving laser | 110 | 300 - 2.5, 400 - 3.0, 630 - 0.75, 630 - 1.25, 800 - 4.2
+SS316  | Moving laser | 153 | 99 - 0.4, 300 - 0.4, 300 - 0.6, 408 - 0.4, 408 - 0.6
+Ti64   | Moving laser | 153 | 111 - 0.4, 139 - 1.2, 154 - 0.4, 197 - 0.6, 311 - 0.7, 311 - 1.0,  520 - 1.0, 540 - 0.7
+Ti64S  | Spot welding | 224 | 220, 270, 425
 
 ### Specification
 The dataset contains xxx for training, xxx images for validation and xxx for test
