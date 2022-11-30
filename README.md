@@ -12,7 +12,7 @@ This is the repo for keyhole image segmentation
 ## Relevant Github Repo
 1. Unet: https://github.com/milesial/Pytorch-UNet#weights--biases
 2. Segmentation models Pytorch: https://github.com/qubvel/segmentation_models.pytorch
-3. [Nasa pretrained-microscopy-models] (https://github.com/nasa/pretrained-microscopy-models)
+3. [Nasa pretrained-microscopy-models](https://github.com/nasa/pretrained-microscopy-models)
 
 ## Keyhole Segmentation Dataset
 ### Data sources
